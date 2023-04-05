@@ -1,1 +1,1 @@
-Hre i lernt how to use ssh
+Hre i lernt how to use ssh key
