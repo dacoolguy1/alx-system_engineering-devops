@@ -41,8 +41,8 @@ listen thelaura
         bind :80
         mode http
         balance roundrobin
-        server 18617-web-01 44.211.79.116:80 check
-        server 18617-web-02 3.236.117.182:80 check
+        server 142263-web-01 100.27.4.167:80 check
+        server 142263-web-02 54.160.93.250:80 check
 
 frontend www-http
         bind :80
@@ -50,11 +50,12 @@ frontend www-http
         default_backend web-backend
 
 frontend www-https
-        bind :443 ssl crt /etc/haproxy/ssl/www.johnelsaphire.tech
+        bind :443 ssl crt /etc/haproxy/ssl/www.emmanueltem.tech
         reqadd X-Forwarded-Proto:\ https
         default_backend web-backend
 
 backend web-backend
         redirect scheme https if !{ ssl_fc }
-        server 18617-web-01 44.211.79.116:80 check
-        server 18617-web-02 3.236.117.182:80 check
+        server 142263-web-01 100.27.4.167:80 check
+        server 142263-web-02 54.160.93.250:80 check
+                                                               
