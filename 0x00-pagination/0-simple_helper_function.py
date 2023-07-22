@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
-""" Calculate the start and end indexes for a given page and page size."""
+"""Simple pagination helper function"""
+from typing import Tuple
 
 
-def index_range(page: int, page_size: int) -> tuple:
-    """
-    Calculate the start and end indexes for a given page and page size.
-
-    Args:
-        page (int): _description_
-        page_size (int): No of items per page
-
-    Returns:
-        tuple: _description_
+def index_range(page: int, page_size: int) -> Tuple[int]:
+    """return start index and an end index corresponding
+        to the range of indexes
     """
     start_index = (page - 1) * page_size
-    end_index = page_size
+    end_index = page * page_size
+
     return (start_index, end_index)
