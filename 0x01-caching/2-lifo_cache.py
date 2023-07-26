@@ -1,27 +1,27 @@
 #!/usr/bin/env python3
-"""Class representation of FIFO caching
+"""Class representation of LIFO caching
 """
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
-    """FIFOCache that inherits from BaseCaching
+class LIFOCache(BaseCaching):
+    """LIFOCache that inherits from BaseCaching
     """
     def __init__(self):
-        """Initialize FIFO caching
+        """Initialize LIFO caching
         """
         super().__init__()
-        self.queue = []
+        self.stack = []
 
     def put(self, key, item):
         """Assign key and item to the cache system
         """
-        if len(self.cache_data) == self.MAX_ITEMS and key not in self.queue:
-            discard = self.queue.pop(0)
+        if len(self.cache_data) == self.MAX_ITEMS and key not in self.stack:
+            discard = self.stack.pop()
             del self.cache_data[discard]
             print("DISCARD: {}".format(discard))
         if key and item:
-            self.queue.append(key)
+            self.stack.append(key)
             self.cache_data[key] = item
 
     def get(self, key):

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Class representation of FIFO caching
+"""Class representation of LRU caching
 """
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
-    """FIFOCache that inherits from BaseCaching
+class LRUCache(BaseCaching):
+    """"LRUCache that inherits from BaseCaching
     """
     def __init__(self):
-        """Initialize FIFO caching
+        """Initialize LRUCache
         """
         super().__init__()
         self.queue = []
@@ -17,16 +17,23 @@ class FIFOCache(BaseCaching):
         """Assign key and item to the cache system
         """
         if len(self.cache_data) == self.MAX_ITEMS and key not in self.queue:
-            discard = self.queue.pop(0)
+            discard = self.queue.pop(0)  # Dequeue key
             del self.cache_data[discard]
             print("DISCARD: {}".format(discard))
+
         if key and item:
-            self.queue.append(key)
+            if key in self.cache_data:
+                self.queue.remove(key)  # remove from the queue
+            self.queue.append(key)  # enqueue key
             self.cache_data[key] = item
 
     def get(self, key):
         """Fetch data from the cache system with key
         """
-        if not key or key not in self.cache_data.keys():
+        if not key or key not in self.cache_data:
             return None
-        return self.cache_data.get(key)
+        # Remove from any position in the queue and add to the back
+        self.queue.remove(key)
+        self.queue.append(key)
+
+        return self.cache_data[key]
