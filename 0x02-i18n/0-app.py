@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
-"""A Flask app that has a single route
+"""Flask app
 """
-
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    """base route of the flask app
-
-    Returns:
-        _type_: _template
+def greet():
+    """Welcome Holberton
     """
     return render_template('0-index.html')
 
 
 if __name__ == "__main__":
-    0-app.run(debug=True)
+    app.run(host="0.0.0.0", port='3000')
